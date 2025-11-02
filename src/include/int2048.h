@@ -19,7 +19,17 @@
 
 namespace sjtu {
 class int2048 {
-  // todo
+private:
+  // store sign and digits in little-endian base 10^4
+  bool neg;                 // false for >=0, true for <0
+  std::vector<int> d;       // least-significant block first
+  static const int BASE = 10000;
+  static const int WIDTH = 4;
+  void trim();
+  static int cmp_abs(const int2048 &a, const int2048 &b);
+  static int2048 add_abs(const int2048 &a, const int2048 &b);
+  static int2048 sub_abs(const int2048 &a, const int2048 &b); // |a| >= |b|
+  static void divmod_abs(const int2048 &a, const int2048 &b, int2048 &q, int2048 &r);
 public:
   // Constructors
   int2048();
